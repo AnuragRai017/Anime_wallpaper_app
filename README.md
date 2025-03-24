@@ -70,7 +70,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-<p align="center">
   <img src="https://i.imgur.com/5Zqn78H.gif" width="350" alt="Contributions Welcome">
 </p>
 
