@@ -1,0 +1,17 @@
+{
+  "name": "wall-app",
+  "compatibility_date": "2025-03-24",
+  "main": "./dist/_worker.js",
+  "assets": {
+    "directory": "./dist"
+  },
+  "site": {
+    "bucket": "./dist"
+  },
+  "build": {
+    "command": "npm run build"
+  },
+  "env": {
+    "NODE_VERSION": "18"
+  }
+}
