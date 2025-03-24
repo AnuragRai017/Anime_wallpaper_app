@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![Wall App Logo](https://via.placeholder.com/150?text=Wall+App)
+![Wall App Logo](./src/assets/icon.jpg)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
@@ -72,10 +72,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Contributions are welcome! Please feel free to submit a Pull Request.
 
-<div align="center">
-  ![Contributions Welcome](https://i.imgur.com/5Zqn78H.gif)
-</div>
+<p align="center">
+  <img src="https://i.imgur.com/5Zqn78H.gif" width="350" alt="Contributions Welcome">
+</p>
 
 ## 📬 Contact
 
-Have questions? Reach out to us at [example@email.com](mailto:example@email.com)
+Have questions? Reach out to us at [anuragrai0714@gmail.com](mailto:anuragrai0714@gmail.com)
