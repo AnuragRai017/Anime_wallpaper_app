@@ -1,5 +1,5 @@
 {
-  "name": "wall-app",
+  "name": "kibe-wall-14",
   "compatibility_date": "2025-03-24",
   "main": "./dist/_worker.js",
   "site": {
