@@ -1,20 +1,17 @@
 import axios from 'axios';
 
-// Create an axios instance with a base URL that works in both dev and prod
 const axiosInstance = axios.create({
   baseURL: import.meta.env.DEV 
     ? 'http://localhost:4321'
-    : 'https://wallhaven.cc',
+    : 'https://kibe-wall-14.babuuroy6565.workers.dev', // Update with your worker URL
   headers: {
     'Accept': 'application/json',
     'Content-Type': 'application/json'
   }
 });
 
-// Remove redundant BASE_DOMAIN definition
-const API_BASE = import.meta.env.DEV 
-  ? '/api/wallhaven'
-  : '/api/v1';
+// Update API base path
+const API_BASE = '/api/wallhaven'; // Use consistent API path for both dev and prod
 
 export interface WallpaperData {
   id: string;
