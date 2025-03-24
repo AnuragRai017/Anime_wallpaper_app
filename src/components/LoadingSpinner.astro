@@ -1,0 +1,45 @@
+---
+interface Props {
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { size = 'md' } = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-6 h-6',
+  md: 'w-10 h-10',
+  lg: 'w-16 h-16',
+};
+---
+
+<div class="relative flex justify-center items-center py-8">
+  <!-- Rotating spinner border -->
+  <div class={`animate-spin rounded-full border-t-2 border-b-2 border-purple-500 ${sizeClasses[size]}`}></div>
+  
+  <!-- Centered anime character that changes based on theme -->
+  <div class="absolute inset-0 flex justify-center items-center">
+    <span class="spinner-char text-2xl"></span>
+  </div>
+  
+  <span class="sr-only">Loading...</span>
+</div>
+
+<style>
+  /* Default spinner character */
+  .spinner-char:before {
+    content: "☆"; /* Fallback anime star */
+  }
+  /* Yellow Flash theme (e.g., Naruto's Yellow Flash) */
+  .theme-yellow-flash .spinner-char:before {
+    content: "⚡";
+  }
+  /* Gojo theme (inspired by Satoru Gojo from JJK) */
+  .theme-gojo .spinner-char:before {
+    content: "👁️";
+  }
+  /* Chainsaw theme (inspired by Chainsaw Man) */
+  .theme-chainsaw .spinner-char:before {
+    content: "🪚";
+  }
+  /* Optionally, add more theme-specific overrides here */
+</style>

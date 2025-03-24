@@ -1,0 +1,284 @@
+---
+import type { WallpaperData } from '../services/wallhavenAPI';
+
+interface Props {
+  wallpaper: WallpaperData;
+}
+
+const { wallpaper } = Astro.props;
+---
+
+<div class="wallpaper-card group relative overflow-hidden rounded-xl shadow-lg transition-all duration-500 transform-gpu">
+  <a href={`/wallpaper/${wallpaper.id}`} class="block aspect-auto">
+    <!-- Main image with enhanced loading and hover effects -->
+    <img 
+      src={wallpaper.thumbs.large} 
+      alt={`Wallpaper ID: ${wallpaper.id}`}
+      loading="lazy"
+      class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+      onload="this.classList.add('loaded')"
+    />
+    
+    <!-- Glass overlay with improved aesthetics -->
+    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 backdrop-blur-sm group-hover:backdrop-blur-0">
+      <!-- Content container with smoother animation -->
+      <div class="absolute bottom-0 left-0 right-0 p-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out">
+        <div class="flex items-center justify-between">
+          <!-- Category and resolution badges with improved design -->
+          <div class="space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+            <span class="px-2 py-1 text-xs rounded-md bg-rose-500 text-white hover:bg-rose-600 transition-colors theme-badge inline-flex items-center gap-1 font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01" />
+              </svg>
+              {wallpaper.category}
+            </span>
+            <span class="px-2 py-1 text-xs rounded-md bg-blue-500 text-white hover:bg-blue-600 transition-colors theme-badge inline-flex items-center gap-1 font-medium">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 4h-4m4 0l-5-5" />
+              </svg>
+              {wallpaper.resolution}
+            </span>
+          </div>
+          
+          <!-- Views and favorites with improved design -->
+          <div class="flex items-center space-x-3 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-200">
+            <span class="flex items-center text-xs text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              {new Intl.NumberFormat().format(wallpaper.views)}
+            </span>
+            <span class="flex items-center text-xs text-gray-300">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5 mr-1 text-rose-400" fill="currentColor" viewBox="0 0 24 24" stroke="none">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+              </svg>
+              {new Intl.NumberFormat().format(wallpaper.favorites)}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Enhanced shine effect on hover -->
+    <div class="card-shine absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-1000 bg-gradient-to-tr from-transparent via-white to-transparent -translate-x-full group-hover:translate-x-full transform-gpu ease-in-out"></div>
+    
+    <!-- ID badge for quick reference -->
+    <div class="absolute top-2 right-2 bg-black/50 backdrop-blur-md px-2 py-1 rounded-md text-xs font-mono text-white opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center">
+      <span class="text-xs mr-1 text-rose-400">#</span>{wallpaper.id}
+    </div>
+  </a>
+  
+  <!-- Loading overlay that fades out -->
+  <div class="loading-overlay absolute inset-0 bg-gray-100 dark:bg-gray-800 flex items-center justify-center transition-opacity duration-500">
+    <div class="w-8 h-8 rounded-full border-2 border-rose-500 border-t-transparent animate-spin"></div>
+  </div>
+</div>
+
+<script>
+  // Apply theme-specific animation classes to the cards
+  function applyThemeAnimations() {
+    const cards = document.querySelectorAll('.wallpaper-card');
+    const html = document.documentElement;
+    const theme = Array.from(html.classList)
+      .find(cls => cls.startsWith('theme-'))?.replace('theme-', '') || 'light';
+    
+    cards.forEach(card => {
+      // Remove all animation classes first
+      card.classList.remove(
+        'animate-pulse-slow', 
+        'animate-flash', 
+        'animate-saw', 
+        'animate-pulse-blue'
+      );
+      
+      // Add theme-specific animation class
+      switch (theme) {
+        case 'red-lunar':
+          card.classList.add('animate-pulse-slow');
+          break;
+        case 'yellow-flash':
+          card.classList.add('animate-flash');
+          break;
+        case 'chainsaw':
+          card.classList.add('animate-saw');
+          break;
+        case 'gojo':
+          card.classList.add('animate-pulse-blue');
+          break;
+      }
+
+      // Adjust badge colors based on theme
+      const badges = card.querySelectorAll('.theme-badge');
+      badges.forEach(badge => {
+        badge.classList.remove(
+          'bg-rose-500', 'hover:bg-rose-600',
+          'bg-blue-500', 'hover:bg-blue-600',
+          'bg-red-700', 'hover:bg-red-600',
+          'bg-amber-700', 'hover:bg-amber-600',
+          'bg-indigo-700', 'hover:bg-indigo-600',
+          'bg-emerald-600', 'hover:bg-emerald-700'
+        );
+        
+        // First badge (category)
+        if (badges[0] === badge) {
+          switch (theme) {
+            case 'light':
+              badge.classList.add('bg-rose-500', 'hover:bg-rose-600');
+              break;
+            case 'dark':
+              badge.classList.add('bg-rose-600', 'hover:bg-rose-700');
+              break;
+            case 'red-lunar':
+              badge.classList.add('bg-red-700', 'hover:bg-red-600');
+              break;
+            case 'yellow-flash':
+              badge.classList.add('bg-amber-700', 'hover:bg-amber-600');
+              break;
+            case 'chainsaw':
+              badge.classList.add('bg-red-900', 'hover:bg-red-800');
+              break;
+            case 'gojo':
+              badge.classList.add('bg-indigo-700', 'hover:bg-indigo-600');
+              break;
+          }
+        } 
+        // Second badge (resolution)
+        else {
+          switch (theme) {
+            case 'light':
+              badge.classList.add('bg-blue-500', 'hover:bg-blue-600');
+              break;
+            case 'dark':
+              badge.classList.add('bg-blue-600', 'hover:bg-blue-700');
+              break;
+            case 'red-lunar':
+              badge.classList.add('bg-red-800', 'hover:bg-red-700');
+              break;
+            case 'yellow-flash':
+              badge.classList.add('bg-amber-800', 'hover:bg-amber-700');
+              break;
+            case 'chainsaw':
+              badge.classList.add('bg-gray-800', 'hover:bg-gray-700');
+              break;
+            case 'gojo':
+              badge.classList.add('bg-blue-800', 'hover:bg-blue-700');
+              break;
+          }
+        }
+      });
+    });
+  }
+  
+  // Handle image loading
+  function handleImageLoading() {
+    document.querySelectorAll('.wallpaper-card img').forEach(img => {
+      if ((img as HTMLImageElement).complete) {
+        // Image already loaded
+        const overlay = img.closest('.wallpaper-card')?.querySelector('.loading-overlay');
+        if (overlay) (overlay as HTMLElement).style.opacity = '0';
+        setTimeout(() => {
+          if (overlay) (overlay as HTMLElement).style.display = 'none';
+        }, 300);
+      } else {
+        // Image still loading
+        img.addEventListener('load', () => {
+          const overlay = img.closest('.wallpaper-card')?.querySelector('.loading-overlay');
+          if (overlay) (overlay as HTMLElement).style.opacity = '0';
+          setTimeout(() => {
+            if (overlay) (overlay as HTMLElement).style.display = 'none';
+          }, 300);
+        });
+      }
+    });
+  }
+
+  // Apply animations on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    applyThemeAnimations();
+    handleImageLoading();
+  });
+
+  // Listen for theme changes
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      if (mutation.attributeName === 'class') {
+        applyThemeAnimations();
+      }
+    });
+  });
+
+  observer.observe(document.documentElement, { attributes: true });
+</script>
+
+<style>
+  /* Enhanced card styles */
+  .wallpaper-card {
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  }
+
+  .wallpaper-card:hover {
+    transform: 
+      scale(var(--theme-hover-scale, 1.05)) 
+      rotate(var(--theme-hover-rotate, 0deg)) 
+      skewX(var(--theme-hover-skew-x, 0deg)) 
+      skewY(var(--theme-hover-skew-y, 0deg)) 
+      translateX(var(--theme-hover-translate-x, 0px)) 
+      translateY(var(--theme-hover-translate-y, -2px));
+    box-shadow: 0 10px 25px var(--theme-card-shadow-color, rgba(236, 72, 153, 0.25));
+  }
+
+  /* Smooth image loading */
+  .wallpaper-card img {
+    opacity: 1;
+    transition: opacity 0.5s ease;
+  }
+  
+  .loading-overlay {
+    z-index: 10;
+  }
+
+  /* Theme-specific shine effects */
+  .theme-red-lunar .card-shine {
+    background: linear-gradient(45deg, transparent, rgba(239, 68, 68, 0.3), transparent);
+  }
+
+  .theme-yellow-flash .card-shine {
+    background: linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.4), transparent);
+  }
+
+  .theme-chainsaw .card-shine {
+    background: linear-gradient(45deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+  }
+
+  .theme-gojo .card-shine {
+    background: linear-gradient(45deg, transparent, rgba(79, 70, 229, 0.3), transparent);
+  }
+  
+  /* Customize borders for light theme */
+  .theme-light .wallpaper-card {
+    border: 1px solid rgba(226, 232, 240, 0.8);
+  }
+  
+  /* Add subtle glass morphism to cards */
+  .wallpaper-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  
+  .wallpaper-card:hover::before {
+    opacity: 1;
+  }
+</style>
