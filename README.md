@@ -8,11 +8,9 @@
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 [![Stars](https://img.shields.io/github/stars/yourusername/Wall_app?style=social)](https://github.com/yourusername/Wall_app/stargazers)
 
-<p align="center">
-  <img src="https://i.imgur.com/LtUGnF3.gif" width="600" alt="Wall App Demo">
-</p>
+![image](https://github.com/user-attachments/assets/8cf2aafc-6e06-418d-8c0e-88ce0b6e3e6b)
 
-</div>
+
 
 ## ✨ Features
 
@@ -23,7 +21,7 @@
 - 🌓 Dark/Light mode toggle
 
 <p align="center">
-  <img src="https://i.imgur.com/QAkd6tt.gif" width="400" alt="Feature Demo">
+  <img src="![image](https://github.com/user-attachments/assets/36ad2c02-bda8-4314-b072-4b8d542170f3)" width="400" alt="Feature Demo">
 </p>
 
 ## 🚀 Getting Started
@@ -53,9 +51,9 @@ npm run dev
 yarn dev
 ```
 
-<p align="center">
-  <img src="https://i.imgur.com/tmdXkvi.gif" width="450" alt="Installation Process">
-</p>
+## Latest Wallpapers :
+![image](https://github.com/user-attachments/assets/3a560716-fe37-4166-ba62-2074a5ba6ab5)
+
 
 ## 🛠️ Tech Stack
 
