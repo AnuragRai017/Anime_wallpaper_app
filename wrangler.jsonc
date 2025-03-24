@@ -9,6 +9,7 @@
     "command": "npm run build"
   },
   "env": {
-    "NODE_VERSION": "18"
+    "NODE_VERSION": "18",
+    "WALLHAVEN_API_URL": "https://wallhaven.cc"
   }
 }
