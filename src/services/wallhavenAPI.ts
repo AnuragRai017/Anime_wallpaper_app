@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+// Create an axios instance with a base URL
+const axiosInstance = axios.create({
+  baseURL: 'https://kibe-wall-14.babuuroy6565.workers.dev',
+});
+
 // Use environment variable or fallback to default URL
 const BASE_DOMAIN = import.meta.env.WALLHAVEN_API_URL || 'https://kibe-wall-14.babuuroy6565.workers.dev';
 
@@ -76,7 +81,7 @@ export const wallhavenAPI = {
   // Get a specific wallpaper by ID
   async getWallpaper(id: string): Promise<WallpaperData> {
     try {
-      const response = await axios.get<WallpaperResponse>(`${API_BASE}/w/${id}`);
+      const response = await axiosInstance.get<WallpaperResponse>(`/api/wallhaven/w/${id}`);
       return response.data.data;
     } catch (error) {
       console.error('Error fetching wallpaper:', error);
@@ -87,7 +92,7 @@ export const wallhavenAPI = {
   // Search for wallpapers
   async searchWallpapers(params: SearchParams = {}): Promise<SearchResponse> {
     try {
-      const response = await axios.get<SearchResponse>(`${API_BASE}/search`, {
+      const response = await axiosInstance.get<SearchResponse>('/api/wallhaven/search', {
         params
       });
       return response.data;
@@ -100,7 +105,7 @@ export const wallhavenAPI = {
   // Get tag information
   async getTagInfo(tagId: number): Promise<any> {
     try {
-      const response = await axios.get(`${API_BASE}/tag/${tagId}`);
+      const response = await axiosInstance.get(`/api/wallhaven/tag/${tagId}`);
       return response.data.data;
     } catch (error) {
       console.error('Error fetching tag info:', error);
