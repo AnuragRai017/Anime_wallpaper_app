@@ -1,9 +1,11 @@
 import axios from 'axios';
 
-// Use absolute URL for development
+// Use environment variable or fallback to default URL
+const BASE_DOMAIN = import.meta.env.WALLHAVEN_API_URL || 'https://kibe-wall-14.babuuroy6565.workers.dev';
+
 const API_BASE = import.meta.env.DEV 
   ? 'http://localhost:4321/api/wallhaven'
-  : '/api/wallhaven';
+  : `${BASE_DOMAIN}/api/wallhaven`;
 
 export interface WallpaperData {
   id: string;
