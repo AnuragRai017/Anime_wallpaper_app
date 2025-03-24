@@ -1,16 +1,20 @@
 import axios from 'axios';
 
-// Create an axios instance with a base URL
+// Create an axios instance with a base URL that works in both dev and prod
 const axiosInstance = axios.create({
-  baseURL: 'https://kibe-wall-14.babuuroy6565.workers.dev',
+  baseURL: import.meta.env.DEV 
+    ? 'http://localhost:4321'
+    : 'https://wallhaven.cc',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  }
 });
 
-// Use environment variable or fallback to default URL
-const BASE_DOMAIN = import.meta.env.WALLHAVEN_API_URL || 'https://kibe-wall-14.babuuroy6565.workers.dev';
-
+// Remove redundant BASE_DOMAIN definition
 const API_BASE = import.meta.env.DEV 
-  ? 'http://localhost:4321/api/wallhaven'
-  : `${BASE_DOMAIN}/api/wallhaven`;
+  ? '/api/wallhaven'
+  : '/api/v1';
 
 export interface WallpaperData {
   id: string;
@@ -78,10 +82,10 @@ export interface SearchParams {
 }
 
 export const wallhavenAPI = {
-  // Get a specific wallpaper by ID
+  // Update the endpoint paths to use API_BASE
   async getWallpaper(id: string): Promise<WallpaperData> {
     try {
-      const response = await axiosInstance.get<WallpaperResponse>(`/api/wallhaven/w/${id}`);
+      const response = await axiosInstance.get<WallpaperResponse>(`${API_BASE}/w/${id}`);
       return response.data.data;
     } catch (error) {
       console.error('Error fetching wallpaper:', error);
@@ -92,7 +96,7 @@ export const wallhavenAPI = {
   // Search for wallpapers
   async searchWallpapers(params: SearchParams = {}): Promise<SearchResponse> {
     try {
-      const response = await axiosInstance.get<SearchResponse>('/api/wallhaven/search', {
+      const response = await axiosInstance.get<SearchResponse>(`${API_BASE}/search`, {
         params
       });
       return response.data;
