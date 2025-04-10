@@ -1,0 +1,416 @@
+/* Global styles for KibeWall */
+/* Tailwind directives are processed by the build system */
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+/* purgecss end ignore */
+
+/* Theme variables */
+:root {
+  --theme-background: #ffffff;
+  --theme-secondary: rgba(255, 255, 255, 0.8);
+  --theme-background-translucent: rgba(255, 255, 255, 0.7);
+  --theme-text-primary: #1e293b;
+  --theme-text-secondary: #475569;
+  --theme-text-accent: #ec4899;
+  --theme-border-color: rgba(226, 232, 240, 0.8);
+  --theme-accent-transparent: rgba(236, 72, 153, 0.05);
+  --theme-card-shadow-color: rgba(236, 72, 153, 0.25);
+  --theme-hover-scale: 1.05;
+  --theme-hover-rotate: 0deg;
+  --theme-hover-skew-x: 0deg;
+  --theme-hover-skew-y: 0deg;
+  --theme-hover-translate-x: 0px;
+  --theme-hover-translate-y: -2px;
+}
+
+/* Dark theme */
+.theme-dark {
+  --theme-background: #111827;
+  --theme-secondary: rgba(31, 41, 55, 0.8);
+  --theme-background-translucent: rgba(17, 24, 39, 0.7);
+  --theme-text-primary: #f1f5f9;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-accent: #ec4899;
+  --theme-border-color: rgba(55, 65, 81, 0.8);
+  --theme-accent-transparent: rgba(236, 72, 153, 0.05);
+  --theme-card-shadow-color: rgba(236, 72, 153, 0.25);
+}
+
+/* Red Lunar theme */
+.theme-red-lunar {
+  --theme-background: #18181b;
+  --theme-secondary: rgba(39, 39, 42, 0.8);
+  --theme-background-translucent: rgba(24, 24, 27, 0.7);
+  --theme-text-primary: #f1f5f9;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-accent: #ef4444;
+  --theme-border-color: rgba(63, 63, 70, 0.8);
+  --theme-accent-transparent: rgba(239, 68, 68, 0.05);
+  --theme-card-shadow-color: rgba(239, 68, 68, 0.25);
+  --theme-hover-scale: 1.03;
+  --theme-hover-rotate: -1deg;
+}
+
+/* Yellow Flash theme */
+.theme-yellow-flash {
+  --theme-background: #fffbeb;
+  --theme-secondary: rgba(254, 249, 195, 0.8);
+  --theme-background-translucent: rgba(255, 251, 235, 0.7);
+  --theme-text-primary: #713f12;
+  --theme-text-secondary: #854d0e;
+  --theme-text-accent: #d97706;
+  --theme-border-color: rgba(252, 211, 77, 0.8);
+  --theme-accent-transparent: rgba(245, 158, 11, 0.05);
+  --theme-card-shadow-color: rgba(245, 158, 11, 0.25);
+  --theme-hover-scale: 1.05;
+  --theme-hover-translate-y: -5px;
+}
+
+/* Chainsaw theme */
+.theme-chainsaw {
+  --theme-background: #111827;
+  --theme-secondary: rgba(31, 41, 55, 0.8);
+  --theme-background-translucent: rgba(17, 24, 39, 0.7);
+  --theme-text-primary: #f1f5f9;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-accent: #ef4444;
+  --theme-border-color: rgba(55, 65, 81, 0.8);
+  --theme-accent-transparent: rgba(239, 68, 68, 0.05);
+  --theme-card-shadow-color: rgba(239, 68, 68, 0.25);
+  --theme-hover-scale: 1.03;
+  --theme-hover-skew-x: 2deg;
+}
+
+/* Gojo theme */
+.theme-gojo {
+  --theme-background: #1e1b4b;
+  --theme-secondary: rgba(30, 27, 75, 0.8);
+  --theme-background-translucent: rgba(30, 27, 75, 0.7);
+  --theme-text-primary: #f1f5f9;
+  --theme-text-secondary: #cbd5e1;
+  --theme-text-accent: #6366f1;
+  --theme-border-color: rgba(55, 48, 163, 0.8);
+  --theme-accent-transparent: rgba(99, 102, 241, 0.05);
+  --theme-card-shadow-color: rgba(99, 102, 241, 0.25);
+  --theme-hover-scale: 1.04;
+  --theme-hover-translate-y: -3px;
+}
+
+/* Navbar styles */
+#navbar {
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+#navbar.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.theme-dark #navbar.scrolled {
+  background-color: rgba(31, 41, 55, 0.85) !important;
+  border-bottom: 1px solid rgba(55, 65, 81, 0.3);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.theme-red-lunar #navbar.scrolled {
+  background-color: rgba(127, 29, 29, 0.85) !important;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
+}
+
+.theme-yellow-flash #navbar.scrolled {
+  background-color: rgba(255, 253, 231, 0.85) !important;
+  border-bottom: 1px solid rgba(255, 160, 0, 0.2);
+  box-shadow: 0 4px 20px rgba(255, 160, 0, 0.15);
+}
+
+.theme-chainsaw #navbar.scrolled {
+  background-color: rgba(17, 24, 39, 0.9) !important;
+  border-bottom: 1px solid rgba(239, 68, 68, 0.4);
+  box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+}
+
+.theme-gojo #navbar.scrolled {
+  background-color: rgba(30, 27, 75, 0.85) !important;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+  box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+}
+
+/* Theme-specific layout styles */
+.themed-body {
+  background-color: var(--theme-background);
+  color: var(--theme-text-primary);
+}
+
+.theme-background-pattern {
+  background: 
+    radial-gradient(circle at 50% 50%, 
+      var(--theme-accent-transparent) 0%,
+      transparent 70%),
+    linear-gradient(
+      var(--theme-background),
+      var(--theme-background)
+    );
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.themed-navbar {
+  background-color: var(--theme-secondary);
+  border-color: var(--theme-border-color);
+}
+
+.themed-main {
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    var(--theme-background-translucent)
+  );
+}
+
+.themed-footer {
+  background-color: var(--theme-secondary);
+  border-color: var(--theme-border-color);
+  color: var(--theme-text-secondary);
+}
+
+/* Theme-specific background effects */
+.theme-red-lunar .theme-background-pattern {
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.15) 0%, transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(185, 28, 28, 0.1) 0%, transparent 50%);
+  animation: backgroundPulse 4s ease-in-out infinite;
+}
+
+.theme-yellow-flash .theme-background-pattern {
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(255, 160, 0, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 80%, rgba(255, 160, 0, 0.05) 0%, transparent 30%);
+  animation: flashBackground 2s ease-out infinite;
+}
+
+.theme-chainsaw .theme-background-pattern {
+  background: 
+    repeating-linear-gradient(45deg,
+      transparent 0px,
+      transparent 10px,
+      rgba(239, 68, 68, 0.02) 10px,
+      rgba(239, 68, 68, 0.02) 20px
+    );
+  animation: chainsawPattern 3s linear infinite;
+}
+
+.theme-gojo .theme-background-pattern {
+  background: 
+    radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%);
+  animation: infinityPulse 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { opacity: 0.3; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes flashBackground {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.2; }
+}
+
+@keyframes chainsawPattern {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes infinityPulse {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+/* Improved text legibility */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--theme-text-primary);
+  font-weight: 600;
+}
+
+.text-primary {
+  color: var(--theme-text-primary);
+}
+
+.text-secondary {
+  color: var(--theme-text-secondary);
+}
+
+.text-accent {
+  color: var(--theme-text-accent);
+}
+
+/* Light mode specific improvements */
+.theme-light p {
+  color: var(--theme-text-primary);
+}
+
+.theme-light .text-gray-300,
+.theme-light .text-gray-400,
+.theme-light .text-gray-500 {
+  color: #475569; /* slate-600 */
+}
+
+.theme-yellow-flash .text-gray-300,
+.theme-yellow-flash .text-gray-400,
+.theme-yellow-flash .text-gray-500 {
+  color: #6d4c41; /* brown-600 */
+}
+
+/* Animation classes */
+.animate-pulse-slow {
+  animation: pulseSlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulseSlow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+.animate-flash {
+  animation: flash 2s ease-out infinite;
+}
+
+@keyframes flash {
+  0%, 70%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  80% {
+    opacity: 0.8;
+    transform: scale(1.03);
+  }
+}
+
+.animate-saw {
+  animation: saw 3s ease-in-out infinite;
+}
+
+@keyframes saw {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  10%, 30%, 50%, 70%, 90% {
+    transform: translateX(-1px) rotate(-0.3deg);
+  }
+  20%, 40%, 60%, 80% {
+    transform: translateX(1px) rotate(0.3deg);
+  }
+}
+
+.animate-pulse-blue {
+  animation: pulseBlue 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+@keyframes pulseBlue {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 5px rgba(99, 102, 241, 0.2);
+  }
+  50% {
+    opacity: 0.9;
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+  }
+}
+
+/* Logo animation */
+.logo-svg .dot-pulse {
+  fill: var(--theme-text-accent);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+
+@keyframes dotPulse {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 1; }
+}
+
+/* Matrix dots animation */
+.matrix-dots {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(var(--theme-text-accent) 1px, transparent 1px),
+    radial-gradient(var(--theme-text-accent) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  opacity: 0.1;
+}
+
+/* Card styles */
+.wallpaper-card {
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.wallpaper-card:hover {
+  transform: 
+    scale(var(--theme-hover-scale, 1.05)) 
+    rotate(var(--theme-hover-rotate, 0deg)) 
+    skewX(var(--theme-hover-skew-x, 0deg)) 
+    skewY(var(--theme-hover-skew-y, 0deg)) 
+    translateX(var(--theme-hover-translate-x, 0px)) 
+    translateY(var(--theme-hover-translate-y, -2px));
+  box-shadow: 0 10px 25px var(--theme-card-shadow-color, rgba(236, 72, 153, 0.25));
+}
+
+.loading-overlay {
+  z-index: 10;
+}
+
+/* Theme-specific shine effects */
+.theme-red-lunar .card-shine {
+  background: linear-gradient(45deg, transparent, rgba(239, 68, 68, 0.3), transparent);
+}
+
+.theme-yellow-flash .card-shine {
+  background: linear-gradient(45deg, transparent, rgba(245, 158, 11, 0.4), transparent);
+}
+
+.theme-chainsaw .card-shine {
+  background: linear-gradient(45deg, transparent, rgba(255, 0, 0, 0.2), transparent);
+}
+
+.theme-gojo .card-shine {
+  background: linear-gradient(45deg, transparent, rgba(79, 70, 229, 0.3), transparent);
+}
+
+/* Customize borders for light theme */
+.theme-light .wallpaper-card {
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+/* Add subtle glass morphism to cards */
+.wallpaper-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.1), transparent);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.wallpaper-card:hover::before {
+  opacity: 1;
+}
