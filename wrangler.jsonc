@@ -8,10 +8,8 @@
     "watch_dir": "src"
   },
 
-  "assets": {
-    "directory": "./dist/client",
-    "exclude": ["_worker.js"],
-    "serve_single_page_app": true
+  "site": {
+    "bucket": "./dist/client"
   },
 
   "env": {

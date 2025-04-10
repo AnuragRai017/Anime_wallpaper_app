@@ -1,8 +1,10 @@
 /* Global styles for KibeWall */
-/* Tailwind directives are processed by the build system */
-/* purgecss start ignore */
+/* Tailwind directives */
+/* tailwindcss base styles */
 @tailwind base;
+/* tailwindcss component styles */
 @tailwind components;
+/* tailwindcss utility styles */
 @tailwind utilities;
 /* purgecss end ignore */
 
