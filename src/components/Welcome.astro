@@ -1,0 +1,197 @@
+---
+--- 
+<!-- Welcome component for the homepage with theme selection -->
+
+<section class="text-center py-12 relative overflow-hidden">
+  <!-- Background design elements -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute top-0 left-1/4 w-64 h-64 bg-gradient-to-br from-pink-500/10 to-purple-500/10 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-full blur-3xl"></div>
+  </div>
+
+  <div class="relative z-10">
+    <div class="flex justify-center">
+      <h1 class="text-5xl md:text-6xl font-bold mb-6 animate-shimmer bg-clip-text">
+        <span class="bg-gradient-to-r from-rose-500 to-purple-600 text-transparent bg-clip-text">KIBEWALL</span>
+      </h1>
+    </div>
+    
+    <p class="text-xl max-w-3xl mx-auto mb-8 text-primary leading-relaxed">
+      Discover and download high-quality anime wallpapers for your desktop or mobile device.
+      <span class="block mt-2 text-accent font-medium">Your ultimate collection featuring your favorite anime characters and series.</span>
+    </p>
+    
+    <div class="flex flex-col md:flex-row justify-center md:space-x-6 space-y-4 md:space-y-0">
+      <a 
+        href="/search?categories=010&purity=100" 
+        class="px-8 py-3 bg-gradient-to-r from-rose-500 to-pink-600 text-white font-medium rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-pink-500/30 backdrop-blur-sm relative overflow-hidden group"
+      >
+        <span class="relative z-10">Browse Anime Wallpapers</span>
+        <!-- Button shine effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out transform-gpu"></div>
+      </a>
+      <a 
+        href="/search" 
+        class="px-8 py-3 bg-gradient-to-r from-slate-700/80 to-slate-800/80 text-white font-medium rounded-xl transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-slate-500/20 backdrop-blur-sm relative overflow-hidden group dark:from-slate-700 dark:to-slate-900"
+      >
+        <span class="relative z-10">Advanced Search</span>
+        <!-- Button shine effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out transform-gpu"></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Theme Selector Section with better UI -->
+<section class="text-center py-6 relative mb-6">
+  <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-300/50 dark:via-gray-700/50 to-transparent"></div>
+  
+  <h2 class="text-2xl font-bold mb-4 text-primary">Choose Your Theme</h2>
+  <div class="flex flex-wrap justify-center gap-2 py-2">
+    <button class="theme-btn rounded-lg p-1 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" data-theme="light">
+      <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-rose-400 to-purple-500 flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+        </svg>
+      </div>
+      <span class="block mt-1 text-xs font-medium text-primary">Light</span>
+    </button>
+    <button class="theme-btn rounded-lg p-1 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" data-theme="dark">
+      <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-gray-700 to-gray-900 flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+        </svg>
+      </div>
+      <span class="block mt-1 text-xs font-medium text-primary">Dark</span>
+    </button>
+    <button class="theme-btn rounded-lg p-1 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-yellow-500" data-theme="yellow-flash">
+      <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <span class="block mt-1 text-xs font-medium text-primary">Yellow Flash</span>
+    </button>
+    <button class="theme-btn rounded-lg p-1 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" data-theme="chainsaw">
+      <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-red-600 to-red-800 flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L9.121 9.121m0 5.758a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm0 0L9.121 9.121" />
+        </svg>
+      </div>
+      <span class="block mt-1 text-xs font-medium text-primary">Chainsaw</span>
+    </button>
+    <button class="theme-btn rounded-lg p-1 transition-transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" data-theme="gojo">
+      <div class="w-12 h-12 rounded-lg bg-gradient-to-br from-indigo-500 to-violet-600 flex items-center justify-center shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+        </svg>
+      </div>
+      <span class="block mt-1 text-xs font-medium text-primary">Gojo</span>
+    </button>
+  </div>
+  
+  <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gray-300/50 dark:via-gray-700/50 to-transparent"></div>
+</section>
+
+<!-- About This App Section with enhanced design -->
+<div class="relative mt-12 p-6 rounded-2xl overflow-hidden transform transition-all duration-500 hover:scale-[1.01] hover:shadow-xl bg-white/40 dark:bg-gray-800/40 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50">
+  <!-- Background gradients for enhanced design -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-rose-100/20 dark:to-rose-900/10"></div>
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-rose-300/30 dark:via-rose-500/30 to-transparent"></div>
+    <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-rose-300/30 dark:via-rose-500/30 to-transparent"></div>
+  </div>
+
+  <div class="relative z-10">
+    <h2 class="text-xl font-semibold mb-4 text-primary bg-clip-text">
+      <span class="text-accent">About This App</span>
+    </h2>
+    <p class="mb-3 text-primary leading-relaxed">
+      This application uses the <a href="https://wallhaven.cc/help/api" class="text-accent hover:underline font-medium">Wallhaven API</a> to provide you with access to thousands of anime wallpapers.
+    </p>
+    <p class="mb-3 text-primary">
+      Features:
+    </p>
+    <ul class="list-disc list-inside ml-4 mb-3 space-y-1 text-primary">
+      <li>Browse the latest anime wallpapers with infinite scroll</li>
+      <li>Search by tags, resolution, or color with advanced filtering</li>
+      <li>View detailed wallpaper information and metadata</li>
+      <li>Download wallpapers in original quality</li>
+      <li>Customize your experience with anime-inspired themes</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Theme switcher script with improved functionality -->
+<script>
+  // Listen for clicks on theme buttons and update theme with visual feedback
+  document.querySelectorAll('.theme-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedTheme = btn.getAttribute('data-theme');
+      
+      // Add brief visual feedback when clicking a theme button
+      btn.classList.add('scale-95', 'opacity-80');
+      setTimeout(() => {
+        btn.classList.remove('scale-95', 'opacity-80');
+      }, 150);
+      
+      // Remove existing theme-* classes
+      document.documentElement.classList.forEach(cls => {
+        if (cls.startsWith('theme-')) {
+          document.documentElement.classList.remove(cls);
+        }
+      });
+      
+      // Add the new theme class
+      document.documentElement.classList.add(`theme-${selectedTheme}`);
+      
+      // Update dark mode based on themes that use dark text
+      if (selectedTheme && ['dark', 'chainsaw', 'gojo'].includes(selectedTheme)) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      
+      // Save the selected theme in localStorage
+      if (selectedTheme) {
+        localStorage.setItem('theme', selectedTheme);
+      }
+      
+      // Mark the selected theme button
+      document.querySelectorAll('.theme-btn').forEach(otherBtn => {
+        otherBtn.classList.remove('ring-2', 'ring-offset-2');
+        
+        if (otherBtn === btn) {
+          otherBtn.classList.add('ring-2', 'ring-offset-2');
+        }
+      });
+    });
+  });
+  
+  // Set the initial active state based on the current theme
+  document.addEventListener('DOMContentLoaded', () => {
+    const currentTheme = localStorage.getItem('theme') || 'light';
+    const activeThemeBtn = document.querySelector(`.theme-btn[data-theme="${currentTheme}"]`);
+    
+    if (activeThemeBtn) {
+      activeThemeBtn.classList.add('ring-2', 'ring-offset-2');
+    }
+  });
+</script>
+
+<style>
+  /* Add shimmer animation to the title */
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+    100% {
+      background-position: 200% 0;
+    }
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 8s linear infinite;
+    background-size: 200% auto;
+  }
+</style>

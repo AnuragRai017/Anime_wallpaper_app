@@ -1,0 +1,28 @@
+{
+  "name": "wall-app",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build && node scripts/post-build.js",
+    "preview": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "^12.3.0",
+    "@astrojs/node": "^9.1.3",
+    "@astrojs/tailwind": "^6.0.0",
+    "@nanostores/react": "^0.8.4",
+    "astro": "^5.5.3",
+    "axios": "^1.8.4",
+    "nanostores": "^0.11.4",
+    "tailwindcss": "^3.4.17"
+  },
+  "devDependencies": {
+    "@cloudflare/kv-asset-handler": "^0.4.0",
+    "@cloudflare/workers-types": "^4.20250327.0",
+    "@types/react": "^19.0.12",
+    "wrangler": "^4.6.0"
+  }
+}

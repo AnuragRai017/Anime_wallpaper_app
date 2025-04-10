@@ -1,0 +1,63 @@
+---
+import { themeConfigs } from '../store/themeStore';
+
+interface Props {
+  title: string;
+  content: string;
+  class?: string;
+}
+
+const { title, content, class: className } = Astro.props;
+---
+
+<div class:list={[
+  'themed-card relative overflow-hidden rounded-lg p-4',
+  className
+]}>
+  <div class="absolute inset-0 themed-overlay"></div>
+  <div class="relative z-10 themed-content">
+    <h3 class="text-lg font-bold mb-2 themed-text">{title}</h3>
+    <p class="themed-text">{content}</p>
+  </div>
+</div>
+
+<script>
+  import { currentTheme, type ThemeName, themeConfigs } from '../store/themeStore';
+  
+  function updateCardStyles(theme: ThemeName) {
+    const themeConfig = themeConfigs[theme];
+    document.querySelectorAll('.themed-card').forEach(card => {
+      // Update card styles
+      card.className = card.className
+        .replace(/bg-\w+-\d+/g, '')
+        .replace(/animate-\w+(-\w+)?/g, '');
+      card.classList.add(
+        themeConfig.secondaryColor,
+        themeConfig.cardAnimation,
+        themeConfig.hoverAnimation
+      );
+
+      // Update overlay
+      const overlay = card.querySelector('.themed-overlay');
+      if (overlay) {
+        overlay.className = 'absolute inset-0 ' + themeConfig.gradientOverlay;
+      }
+
+      // Update content container
+      const content = card.querySelector('.themed-content');
+      if (content) {
+        content.className = 'relative z-10 ' + themeConfig.specialEffect;
+      }
+
+      // Update text elements
+      card.querySelectorAll('.themed-text').forEach(text => {
+        text.className = text.className
+          .replace(/text-\w+-\d+/g, '')
+          + ' ' + themeConfig.textColor;
+      });
+    });
+  }
+
+  // Initialize card styles and listen for theme changes
+  currentTheme.subscribe(updateCardStyles);
+</script>

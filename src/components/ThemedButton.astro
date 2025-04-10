@@ -1,0 +1,34 @@
+---
+import { themeConfigs } from '../store/themeStore';
+
+interface Props {
+  onClick?: string;
+  class?: string;
+}
+
+const { onClick, class: className } = Astro.props;
+---
+
+<button 
+  class:list={[
+    'px-4 py-2 rounded-md transition-all',
+    className
+  ]}
+  onclick={onClick}
+>
+  <slot />
+</button>
+
+<script>
+  import { currentTheme, type ThemeName, themeConfigs } from '../store/themeStore';
+  
+  // Update button styles when theme changes
+  currentTheme.subscribe((theme: ThemeName) => {
+    document.querySelectorAll('button').forEach(button => {
+      // Remove all theme-specific button styles
+      button.className = button.className.replace(/bg-\w+-\d+ text-\w+-\d+ hover:bg-\w+-\d+ focus:ring-\w+-\d+/g, '');
+      // Add new theme's button styles
+      button.classList.add(...themeConfigs[theme].buttonStyle.split(' '));
+    });
+  });
+</script>

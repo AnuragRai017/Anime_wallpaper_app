@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{Astro.props.title}</title>
+    <!-- Add script to set theme before page renders to prevent flash -->
+    <script is:inline>
+      // Check saved theme or system preference
+      const theme = (() => {
+        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+          return localStorage.getItem('theme');
+        }
+        if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          return 'dark';
+        }
+        return 'light';
+      })();
+      
+      // Add or remove dark class based on theme
+      if (theme === 'dark' || theme === 'red-lunar' || theme === 'chainsaw' || theme === 'gojo') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      // Add theme-specific class
+      document.documentElement.classList.add(`theme-${theme}`);
+    </script>
+    <!-- Import Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="themed-body min-h-screen transition-colors duration-300 font-poppins">
+    <div class="theme-background-pattern absolute inset-0 pointer-events-none"></div>
+    <header id="navbar" class="themed-navbar fixed top-0 left-0 right-0 w-full z-50 transition-all duration-300">
+      <!-- Enhanced Matrix pattern background -->
+      <div class="absolute inset-0 overflow-hidden opacity-15">
+        <div class="matrix-dots"></div>
+      </div>
+      
+      <!-- Improved Navbar content -->
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-3">
+          <div class="flex items-center">
+            <a href="/" class="relative group flex items-center space-x-3">
+              <!-- App Icon -->
+              <div class="w-10 h-10 rounded-lg overflow-hidden shadow-lg transform transition-all duration-500 hover:scale-110">
+                <img src="/assets/icon.jpg" alt="KIBEWALL" class="w-full h-full object-cover" />
+              </div>
+              <!-- Logo Text -->
+              <div class="logo-container relative">
+                <svg xmlns="http://www.w3.org/2000/svg" width="150" height="40" viewBox="0 0 300 80" class="logo-svg">
+                  <!-- KIBEWALL Text -->
+                  <text x="150" y="42" font-family="'Poppins', sans-serif" font-size="36" font-weight="800" text-anchor="middle" fill="url(#logo-gradient)" fill-opacity="1" letter-spacing="2" style="fill: #ec4899;">
+                    KIBEWALL
+                  </text>
+                  
+                  <!-- Animated dot row beneath logo -->
+                  <g class="dot-row">
+                    <circle cx="75" cy="60" r="3" class="dot-pulse" style="animation-delay: 0s" />
+                    <circle cx="95" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.1s" />
+                    <circle cx="115" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.2s" />
+                    <circle cx="135" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.3s" />
+                    <circle cx="155" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.4s" />
+                    <circle cx="175" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.5s" />
+                    <circle cx="195" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.6s" />
+                    <circle cx="215" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.7s" />
+                    <circle cx="235" cy="60" r="3" class="dot-pulse" style="animation-delay: 0.8s" />
+                  </g>
+                  
+                  <!-- Gradient for text -->
+                  <defs>
+                    <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" class="logo-gradient-start" stop-color="#ef4444" />
+                      <stop offset="100%" class="logo-gradient-end" stop-color="#ec4899" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                
+                <!-- Light Animation Effect -->
+                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-0 group-hover:opacity-30 blur-sm -translate-x-full group-hover:translate-x-full transition-all duration-1500 ease-in-out transform-gpu"></div>
+              </div>
+            </a>
+          </div>
+          
+          <nav class="flex items-center space-x-6">
+            <div class="hidden md:flex space-x-1">
+              {[ 
+                { href: '/', label: 'Home', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>` },
+                { href: '/search', label: 'Search', icon: `<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>` }
+              ].map(link => (
+                <a
+                  href={link.href}
+                  class="nav-item relative px-4 py-2 rounded-lg text-sm font-medium text-gray-800 dark:text-gray-200 transition-all duration-300 hover:text-rose-600 dark:hover:text-rose-400"
+                >
+                  <span class="flex items-center space-x-2">
+                    <span class="nav-icon" set:html={link.icon} />
+                    <span class="nav-label font-medium">{link.label}</span>
+                  </span>
+                  <span class="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-rose-500 to-pink-600 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></span>
+                  <!-- Glowing dot indicator -->
+                  <span class="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1.5 h-1.5 bg-rose-500 rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 nav-dot"></span>
+                </a>
+              ))}
+            </div>
+            
+            <!-- Mobile menu button -->
+            <button class="md:hidden p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+              </svg>
+            </button>
+            
+            <!-- Theme Toggle Button - Replaced with ThemeSelector component -->
+            <div class="theme-toggle-container">
+              {Astro.slots.has('theme-selector') ? (
+                <slot name="theme-selector" />
+              ) : (
+                <div class="theme-selector-placeholder">
+                  <import-statement to="../../components/ThemeSelector.astro" />
+                </div>
+              )}
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Added padding to compensate for fixed navbar -->
+    <div class="pt-20"></div>
+    
+    <main class="themed-main relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <slot />
+    </main>
+    
+    <footer class="themed-footer border-t">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <p class="text-center text-gray-600 dark:text-gray-400 text-sm">
+          &copy; {new Date().getFullYear()} KIBEWALL. Powered by <a href="https://wallhaven.cc" target="_blank" rel="noopener noreferrer" class="text-rose-600 dark:text-rose-400 hover:text-rose-500 dark:hover:text-rose-300 transition-colors">Wallhaven API</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      import { initializeTheme } from '../store/themeStore';
+      
+      // Initialize theme from store
+      initializeTheme();
+      
+      // Navbar scroll behavior with null check
+      const navbar = document.getElementById('navbar');
+      
+      window.addEventListener('scroll', () => {
+        if (navbar) {
+          if (window.scrollY > 50) {
+            // Make navbar transparent when scrolling
+            navbar.classList.add('scrolled');
+          } else {
+            // Return to default state
+            navbar.classList.remove('scrolled');
+          }
+        }
+      });
+      
+      // Update logo gradient colors based on theme
+      function updateLogoColors() {
+        const html = document.documentElement;
+        const gradientStart = document.querySelector('.logo-gradient-start');
+        const gradientEnd = document.querySelector('.logo-gradient-end');
+        const dotRow = document.querySelector('.dot-row');
+        
+        if (!gradientStart || !gradientEnd || !dotRow) return;
+        
+        // Set default colors
+        let startColor = '#ef4444';
+        let endColor = '#ec4899';
+        let dotFill = '#ef4444';
+        
+        // Check current theme
+        if (html.classList.contains('theme-yellow-flash')) {
+          startColor = '#ffa000';
+          endColor = '#fcd34d';
+          dotFill = '#ffa000';
+        } else if (html.classList.contains('theme-chainsaw')) {
+          startColor = '#991b1b';
+          endColor = '#ef4444';
+          dotFill = '#991b1b';
+        } else if (html.classList.contains('theme-gojo')) {
+          startColor = '#4f46e5';
+          endColor = '#818cf8';
+          dotFill = '#4f46e5';
+        } else if (html.classList.contains('theme-red-lunar')) {
+          startColor = '#991b1b';
+          endColor = '#ef4444';
+          dotFill = '#991b1b';
+        } else if (html.classList.contains('theme-light')) {
+          startColor = '#ec4899';
+          endColor = '#8b5cf6';
+          dotFill = '#ec4899';
+        }
+        
+        // Apply colors
+        gradientStart.setAttribute('stop-color', startColor);
+        gradientEnd.setAttribute('stop-color', endColor);
+        
+        // Update dot colors
+        dotRow.querySelectorAll('circle').forEach(circle => {
+          circle.setAttribute('fill', dotFill);
+        });
+      }
+      
+      // Update logo colors when theme changes
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          if (mutation.attributeName === 'class') {
+            updateLogoColors();
+          }
+        });
+      });
+      
+      observer.observe(document.documentElement, { attributes: true });
+      
+      // Initialize colors
+      document.addEventListener('DOMContentLoaded', updateLogoColors);
+    </script>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+  
+  :root {
+    --accent: 236, 72, 153;
+    --accent-gradient: linear-gradient(45deg, 
+      rgb(var(--accent)), 
+      #ec4899 30%, 
+      #8b5cf6 60%
+    );
+    --text-glitch-offset: 2px;
+  }
+
+  /* Base Theme Variables */
+  .theme-light {
+    --theme-background: #f8fafc;
+    --theme-foreground: #1e293b;
+    --theme-accent: #ec4899;
+    --theme-secondary: #ffffff;
+    --theme-hover-scale: 1.05;
+    --theme-hover-rotate: 0deg;
+    --theme-hover-skew-x: 0deg;
+    --theme-hover-skew-y: 0deg;
+    --theme-hover-translate-x: 0px;
+    --theme-hover-translate-y: -2px;
+    --theme-card-shadow-color: rgba(236, 72, 153, 0.2);
+    --theme-background-translucent: rgba(255, 255, 255, 0.02);
+    --theme-accent-transparent: rgba(236, 72, 153, 0.05);
+    --theme-border-color: rgba(203, 213, 225, 0.4);
+    --theme-text-primary: #1e293b;
+    --theme-text-secondary: #64748b;
+    --theme-text-accent: #ec4899;
+  }
+
+  .theme-dark {
+    --theme-background: #0f172a;
+    --theme-foreground: #f1f5f9;
+    --theme-accent: #ec4899;
+    --theme-secondary: #1e293b;
+    --theme-hover-scale: 1.05;
+    --theme-hover-rotate: 0deg;
+    --theme-hover-skew-x: 0deg;
+    --theme-hover-skew-y: 0deg;
+    --theme-hover-translate-x: 0px;
+    --theme-hover-translate-y: -2px;
+    --theme-card-shadow-color: rgba(236, 72, 153, 0.2);
+    --theme-background-translucent: rgba(0, 0, 0, 0.02);
+    --theme-accent-transparent: rgba(236, 72, 153, 0.1);
+    --theme-border-color: rgba(51, 65, 85, 0.6);
+    --theme-text-primary: #f1f5f9;
+    --theme-text-secondary: #94a3b8;
+    --theme-text-accent: #ec4899;
+  }
+
+  /* --- Anime-Inspired Themes --- */
+
+  /* Yellow Flash Theme (Inspired by Naruto's Yellow Flash - Minato's speed and vibrant energy) */
+  .theme-yellow-flash {
+    --theme-background: #fffde7; /* bright, energetic yellow */
+    --theme-foreground: #6d4c41; /* warm brown */
+    --theme-accent: #ffa000; /* vibrant orange-yellow */
+    --theme-secondary: #fff9c4;
+    --theme-hover-scale: 1.1;
+    --theme-hover-rotate: -1deg;
+    --theme-hover-skew-x: 0deg;
+    --theme-hover-skew-y: 0deg;
+    --theme-hover-translate-x: -1px;
+    --theme-hover-translate-y: -5px;
+    --theme-card-shadow-color: rgba(255, 160, 0, 0.5);
+    --theme-background-translucent: rgba(255, 160, 0, 0.05);
+    --theme-accent-transparent: rgba(255, 160, 0, 0.1);
+    --theme-border-color: rgba(255, 160, 0, 0.2);
+    --theme-text-primary: #6d4c41;
+    --theme-text-secondary: #8d6e63;
+    --theme-text-accent: #ff8f00;
+  }
+
+  /* Chainsaw Theme (Inspired by Chainsaw aesthetics seen in Chainsaw Man) */
+  .theme-chainsaw {
+    --theme-background: #1f2937;
+    --theme-foreground: #f9fafb;
+    --theme-accent: #ef4444;
+    --theme-secondary: #111827;
+    --theme-hover-scale: 1.05;
+    --theme-hover-rotate: 0deg;
+    --theme-hover-skew-x: 2deg;
+    --theme-hover-skew-y: -1deg;
+    --theme-hover-translate-x: 2px;
+    --theme-hover-translate-y: 0px;
+    --theme-card-shadow-color: rgba(239, 68, 68, 0.3);
+    --theme-background-translucent: rgba(239, 68, 68, 0.05);
+    --theme-accent-transparent: rgba(239, 68, 68, 0.1);
+    --theme-border-color: rgba(239, 68, 68, 0.2);
+    --theme-text-primary: #f9fafb;
+    --theme-text-secondary: #d1d5db;
+    --theme-text-accent: #ef4444;
+  }
+
+  /* Gojo Theme (Inspired by Satoru Gojo from Jujutsu Kaisen with his signature cool, luminous aura) */
+  .theme-gojo {
+    --theme-background: #312e81;
+    --theme-foreground: #e0e7ff;
+    --theme-accent: #6366f1;
+    --theme-secondary: #1e1b4b;
+    --theme-hover-scale: 1.05;
+    --theme-hover-rotate: 0deg;
+    --theme-hover-skew-x: 0deg;
+    --theme-hover-skew-y: 0deg;
+    --theme-hover-translate-x: 2px;
+    --theme-hover-translate-y: -3px;
+    --theme-card-shadow-color: rgba(99, 102, 241, 0.3);
+    --theme-background-translucent: rgba(99, 102, 241, 0.05);
+    --theme-accent-transparent: rgba(99, 102, 241, 0.1);
+    --theme-border-color: rgba(99, 102, 241, 0.2);
+    --theme-text-primary: #e0e7ff;
+    --theme-text-secondary: #c7d2fe;
+    --theme-text-accent: #818cf8;
+  }
+
+  /* Font settings */
+  .font-poppins {
+    font-family: 'Poppins', system-ui, sans-serif;
+  }
+
+  /* Matrix dot pattern animation */
+  @keyframes matrixDots {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.3; }
+  }
+
+  .matrix-dots {
+    position: absolute;
+    inset: -10% -5% -5% -5%;
+    background-image: radial-gradient(circle, rgba(236, 72, 153, 0.2) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: matrixDots 8s ease infinite;
+  }
+
+  /* Theme-specific matrix patterns */
+  .theme-red-lunar .matrix-dots {
+    background-image: radial-gradient(circle, rgba(255, 0, 0, 0.3) 1px, transparent 1px);
+    background-size: 15px 15px;
+    animation: matrixDots 4s ease-in-out infinite;
+  }
+
+  .theme-yellow-flash .matrix-dots {
+    background-image: radial-gradient(circle, rgba(255, 160, 0, 0.2) 1px, transparent 1px);
+    background-size: 12px 12px;
+    animation: matrixDots 2s ease-out infinite;
+  }
+
+  .theme-chainsaw .matrix-dots {
+    background-image: repeating-linear-gradient(45deg, rgba(255, 0, 0, 0.1) 0px, rgba(255, 0, 0, 0.1) 2px, transparent 2px, transparent 4px);
+    animation: none;
+  }
+
+  .theme-gojo .matrix-dots {
+    background-image: radial-gradient(circle, rgba(99, 102, 241, 0.2) 1px, transparent 1px);
+    background-size: 18px 18px;
+    animation: matrixDots 6s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  /* Dot pulse animations for logo */
+  .dot-pulse {
+    opacity: 0;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { 
+      opacity: 0.2;
+      transform: scale(0.8);
+    }
+    50% { 
+      opacity: 1;
+      transform: scale(1.2);
+    }
+  }
+
+  /* Theme-specific pulse animations */
+  .theme-red-lunar .dot-pulse {
+    animation: redLunarPulse 1.5s infinite;
+  }
+
+  @keyframes redLunarPulse {
+    0%, 100% { 
+      opacity: 0.2;
+      transform: scale(0.8);
+      filter: drop-shadow(0 0 5px rgba(239, 68, 68, 0.8));
+    }
+    50% { 
+      opacity: 1;
+      transform: scale(1.3);
+      filter: drop-shadow(0 0 8px rgba(239, 68, 68, 1));
+    }
+  }
+
+  .theme-yellow-flash .dot-pulse {
+    animation: flashPulse 1s infinite;
+  }
+
+  @keyframes flashPulse {
+    0% { 
+      opacity: 0.1;
+      transform: scale(0.8);
+    }
+    10% { 
+      opacity: 1;
+      transform: scale(1.4);
+    }
+    100% { 
+      opacity: 0.1;
+      transform: scale(0.8);
+    }
+  }
+
+  .theme-chainsaw .dot-pulse {
+    animation: chainsawPulse 3s infinite;
+  }
+
+  @keyframes chainsawPulse {
+    0%, 100% { 
+      opacity: 0.3;
+      transform: scale(0.9) rotate(0deg);
+    }
+    25% {
+      transform: scale(1.1) rotate(-2deg);
+    }
+    50% { 
+      opacity: 0.8;
+      transform: scale(1.2) rotate(2deg);
+    }
+    75% {
+      transform: scale(1.1) rotate(-2deg);
+    }
+  }
+
+  .theme-gojo .dot-pulse {
+    animation: gojoPulse 2.5s infinite;
+  }
+
+  @keyframes gojoPulse {
+    0%, 100% { 
+      opacity: 0.2;
+      transform: scale(0.8);
+      filter: drop-shadow(0 0 4px rgba(99, 102, 241, 0.6));
+    }
+    50% { 
+      opacity: 1;
+      transform: scale(1.2) translate(1px, -1px);
+      filter: drop-shadow(0 0 8px rgba(99, 102, 241, 1));
+    }
+  }
+
+  /* Nav item enhancements */
+  .nav-item {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    background: linear-gradient(to bottom, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.025));
+    backdrop-filter: blur(5px);
+    transition: all 0.3s ease;
+  }
+
+  .dark .nav-item {
+    background: linear-gradient(to bottom, rgba(30, 30, 30, 0.3), rgba(15, 15, 15, 0.3));
+  }
+
+  .nav-item:hover {
+    background: linear-gradient(to bottom, rgba(236, 72, 153, 0.05), rgba(236, 72, 153, 0.025));
+    box-shadow: 0 0 15px rgba(236, 72, 153, 0.15);
+  }
+
+  .nav-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+    color: var(--theme-text-primary);
+  }
+
+  .nav-item:hover .nav-icon {
+    opacity: 1;
+    color: var(--theme-accent);
+    transform: translateY(-1px);
+  }
+
+  .nav-label {
+    font-size: 0.95rem;
+    letter-spacing: 0.02em;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+    color: var(--theme-text-primary);
+  }
+
+  .nav-item:hover .nav-label {
+    color: var(--theme-accent);
+  }
+
+  .nav-dot {
+    box-shadow: 0 0 8px var(--theme-accent), 0 0 12px var(--theme-accent);
+  }
+
+  /* Card animations for different themes */
+  .animate-pulse-slow {
+    animation: pulseSlow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulseSlow {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.8;
+    }
+  }
+
+  .animate-flash {
+    animation: flash 2s ease-out infinite;
+  }
+
+  @keyframes flash {
+    0%, 70%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    80% {
+      opacity: 0.8;
+      transform: scale(1.03);
+    }
+  }
+
+  .animate-saw {
+    animation: saw 3s ease-in-out infinite;
+  }
+
+  @keyframes saw {
+    0%, 100% {
+      transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translateX(-1px) rotate(-0.3deg);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translateX(1px) rotate(0.3deg);
+    }
+  }
+
+  .animate-pulse-blue {
+    animation: pulseBlue 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes pulseBlue {
+    0%, 100% {
+      opacity: 1;
+      box-shadow: 0 0 5px rgba(99, 102, 241, 0.2);
+    }
+    50% {
+      opacity: 0.9;
+      box-shadow: 0 0 15px rgba(99, 102, 241, 0.4);
+    }
+  }
+
+  /* Generic card hover effects that respect theme variables */
+  .wallpaper-card {
+    transition: all 0.3s ease;
+  }
+
+  .wallpaper-card:hover {
+    transform: 
+      scale(var(--theme-hover-scale)) 
+      rotate(var(--theme-hover-rotate)) 
+      skewX(var(--theme-hover-skew-x)) 
+      skewY(var(--theme-hover-skew-y)) 
+      translateX(var(--theme-hover-translate-x)) 
+      translateY(var(--theme-hover-translate-y));
+    box-shadow: 0 10px 25px var(--theme-card-shadow-color);
+  }
+  
+  /* Sticky navbar style when scrolling */
+  #navbar {
+    transition: all 0.3s ease;
+  }
+  
+  #navbar.scrolled {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(236, 72, 153, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark #navbar.scrolled {
+    background-color: rgba(15, 23, 42, 0.85) !important;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(236, 72, 153, 0.2);
+    box-shadow: 0 4px 20px rgba(236, 72, 153, 0.1);
+  }
+
+  /* Theme-specific navbar styling */
+  .theme-red-lunar #navbar.scrolled {
+    background-color: rgba(127, 29, 29, 0.85) !important;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.3);
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.2);
+  }
+
+  .theme-yellow-flash #navbar.scrolled {
+    background-color: rgba(255, 253, 231, 0.85) !important;
+    border-bottom: 1px solid rgba(255, 160, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(255, 160, 0, 0.15);
+  }
+
+  .theme-chainsaw #navbar.scrolled {
+    background-color: rgba(17, 24, 39, 0.9) !important;
+    border-bottom: 1px solid rgba(239, 68, 68, 0.4);
+    box-shadow: 0 4px 20px rgba(239, 68, 68, 0.25);
+  }
+
+  .theme-gojo #navbar.scrolled {
+    background-color: rgba(30, 27, 75, 0.85) !important;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.3);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.2);
+  }
+
+  /* Theme-specific layout styles */
+  .themed-body {
+    background-color: var(--theme-background);
+    color: var(--theme-text-primary);
+  }
+
+  .theme-background-pattern {
+    background: 
+      radial-gradient(circle at 50% 50%, 
+        var(--theme-accent-transparent) 0%,
+        transparent 70%),
+      linear-gradient(
+        var(--theme-background),
+        var(--theme-background)
+      );
+    opacity: 0.5;
+    z-index: 0;
+  }
+
+  .themed-navbar {
+    background-color: var(--theme-secondary);
+    border-color: var(--theme-border-color);
+  }
+
+  .themed-main {
+    background: linear-gradient(
+      to bottom,
+      transparent,
+      var(--theme-background-translucent)
+    );
+  }
+
+  .themed-footer {
+    background-color: var(--theme-secondary);
+    border-color: var(--theme-border-color);
+    color: var(--theme-text-secondary);
+  }
+
+  /* Theme-specific background effects */
+  .theme-red-lunar .theme-background-pattern {
+    background: 
+      radial-gradient(circle at 30% 30%, rgba(239, 68, 68, 0.15) 0%, transparent 60%),
+      radial-gradient(circle at 70% 70%, rgba(185, 28, 28, 0.1) 0%, transparent 50%);
+    animation: backgroundPulse 4s ease-in-out infinite;
+  }
+
+  .theme-yellow-flash .theme-background-pattern {
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(255, 160, 0, 0.1) 0%, transparent 40%),
+      radial-gradient(circle at 80% 80%, rgba(255, 160, 0, 0.05) 0%, transparent 30%);
+    animation: flashBackground 2s ease-out infinite;
+  }
+
+  .theme-chainsaw .theme-background-pattern {
+    background: 
+      repeating-linear-gradient(45deg,
+        transparent 0px,
+        transparent 10px,
+        rgba(239, 68, 68, 0.02) 10px,
+        rgba(239, 68, 68, 0.02) 20px
+      );
+    animation: chainsawPattern 3s linear infinite;
+  }
+
+  .theme-gojo .theme-background-pattern {
+    background: 
+      radial-gradient(circle at 50% 50%, rgba(99, 102, 241, 0.1) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(99, 102, 241, 0.05) 0%, transparent 40%);
+    animation: infinityPulse 4s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  }
+
+  @keyframes backgroundPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 0.5; }
+  }
+
+  @keyframes flashBackground {
+    0% { opacity: 0.2; }
+    50% { opacity: 0.4; }
+    100% { opacity: 0.2; }
+  }
+
+  @keyframes chainsawPattern {
+    0% { background-position: 0 0; }
+    100% { background-position: 40px 40px; }
+  }
+
+  @keyframes infinityPulse {
+    0%, 100% { 
+      opacity: 0.3;
+      transform: scale(1);
+    }
+    50% { 
+      opacity: 0.5;
+      transform: scale(1.05);
+    }
+  }
+
+  /* Improved text legibility */
+  h1, h2, h3, h4, h5, h6 {
+    color: var(--theme-text-primary);
+    font-weight: 600;
+  }
+
+  .text-primary {
+    color: var(--theme-text-primary);
+  }
+
+  .text-secondary {
+    color: var(--theme-text-secondary);
+  }
+
+  .text-accent {
+    color: var(--theme-text-accent);
+  }
+
+  /* Light mode specific improvements */
+  .theme-light p {
+    color: var(--theme-text-primary);
+  }
+
+  .theme-light .text-gray-300,
+  .theme-light .text-gray-400,
+  .theme-light .text-gray-500 {
+    color: #475569; /* slate-600 */
+  }
+  
+  .theme-yellow-flash .text-gray-300,
+  .theme-yellow-flash .text-gray-400,
+  .theme-yellow-flash .text-gray-500 {
+    color: #6d4c41; /* brown-600 */
+  }
+</style>
