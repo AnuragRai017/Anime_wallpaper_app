@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import cloudflare from '@astrojs/cloudflare';
 
+// https://astro.build/config
 export default defineConfig({
   output: 'server',
   integrations: [tailwind()],
@@ -17,8 +18,9 @@ export default defineConfig({
   }),
   vite: {
     build: {
+      cssCodeSplit: false, // Bundle all CSS into a single file
+      assetsInlineLimit: 0, // Don't inline any assets as data URLs
       minify: true,
-      assetsInlineLimit: 4096,
       rollupOptions: {
         output: {
           assetFileNames: 'assets/[name].[hash][extname]',
@@ -26,6 +28,10 @@ export default defineConfig({
           entryFileNames: 'entries/[name].[hash].js'
         }
       }
+    },
+    css: {
+      // Ensure CSS is properly processed
+      devSourcemap: true,
     },
     ssr: {
       external: ['@astrojs/cloudflare-runtime']

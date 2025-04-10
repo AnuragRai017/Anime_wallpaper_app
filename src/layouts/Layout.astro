@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { themeConfigs, type ThemeName } from '../store/themeStore';
 
 const { title } = Astro.props;
 ---
@@ -10,37 +11,13 @@ const { title } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="KibeWall - Anime Wallpaper App" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="description" content="KibeWall - Your Anime Wallpaper Collection" />
     <title>{title}</title>
-    <!-- Add script to set theme before page renders to prevent flash -->
-    <script is:inline>
-      // Check saved theme or system preference
-      const savedTheme = localStorage.getItem('theme');
-      const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      
-      // Set initial theme
-      if (savedTheme) {
-        document.documentElement.classList.add(savedTheme);
-      } else if (systemPrefersDark) {
-        document.documentElement.classList.add('theme-dark');
-      } else {
-        document.documentElement.classList.add('theme-light');
-      }
-      
-      // Function to update theme
-      window.updateTheme = function(theme) {
-        // Remove all theme classes
-        document.documentElement.classList.remove(
-          'theme-light', 'theme-dark', 'theme-red-lunar', 
-          'theme-yellow-flash', 'theme-chainsaw', 'theme-gojo'
-        );
-        // Add selected theme
-        document.documentElement.classList.add(theme);
-        // Save to localStorage
-        localStorage.setItem('theme', theme);
-      };
-    </script>
+    <!-- Preload CSS -->
+    <link rel="preload" href="/assets/index.css" as="style" />
+    <!-- Ensure CSS is loaded -->
+    <link rel="stylesheet" href="/assets/index.css" />
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -104,6 +81,52 @@ const { title } = Astro.props;
         </p>
       </div>
     </footer>
+    
+    <script>
+      // Define theme update function globally
+      window.updateTheme = function(themeName) {
+        // Remove any existing theme classes
+        document.documentElement.classList.forEach(cls => {
+          if (cls.startsWith('theme-')) {
+            document.documentElement.classList.remove(cls);
+          }
+        });
+        
+        // Add the new theme class
+        const themeClass = themeName.startsWith('theme-') ? themeName : `theme-${themeName}`;
+        document.documentElement.classList.add(themeClass);
+        
+        // Store the theme preference
+        localStorage.setItem('theme', themeClass);
+        
+        // Update data-theme attribute for components that rely on it
+        document.documentElement.setAttribute('data-theme', themeName);
+      };
+
+      // Initialize theme on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        // Check for saved theme preference or use browser preference
+        const savedTheme = localStorage.getItem('theme') || 'theme-light';
+        
+        // If user has set a theme preference, use it
+        if (savedTheme) {
+          window.updateTheme(savedTheme);
+        } 
+        // Otherwise check for system preference
+        else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+          window.updateTheme('theme-dark');
+        } else {
+          window.updateTheme('theme-light');
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+          if (!localStorage.getItem('theme')) {
+            window.updateTheme(e.matches ? 'theme-dark' : 'theme-light');
+          }
+        });
+      });
+    </script>
     
     <script>
       // Handle navbar scrolling effect

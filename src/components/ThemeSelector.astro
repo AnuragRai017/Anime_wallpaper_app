@@ -63,10 +63,10 @@ import { themeConfigs, currentTheme, setTheme, type ThemeName } from '../store/t
   let isDropdownOpen: boolean = false;
   
   // DOM Elements
-  const themeToggle: HTMLButtonElement | null = document.getElementById('theme-toggle');
-  const themeDropdown: HTMLDivElement | null = document.getElementById('theme-dropdown');
-  const themeOptions: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.theme-option');
-  const currentThemeNameEl: HTMLSpanElement | null = document.querySelector('.current-theme-name');
+  const themeToggle = document.getElementById('theme-toggle') as HTMLButtonElement | null;
+  const themeDropdown = document.getElementById('theme-dropdown') as HTMLDivElement | null;
+  const themeOptions = document.querySelectorAll('.theme-option') as NodeListOf<HTMLButtonElement>;
+  const currentThemeNameEl = document.querySelector('.current-theme-name') as HTMLSpanElement | null;
   
   // Declare updateTheme on window for TypeScript
   declare global {
@@ -80,7 +80,7 @@ import { themeConfigs, currentTheme, setTheme, type ThemeName } from '../store/t
     document.querySelectorAll('.theme-icon > svg').forEach(icon => {
       icon.classList.add('hidden');
     });
-    const activeIcon: SVGElement | null = document.querySelector(`.theme-icon-${themeName}`);
+    const activeIcon = document.querySelector(`.theme-icon-${themeName}`) as SVGElement | null;
     if (activeIcon) {
       activeIcon.classList.remove('hidden');
     }
@@ -141,7 +141,7 @@ import { themeConfigs, currentTheme, setTheme, type ThemeName } from '../store/t
   // Initialize the theme icon on load
   document.addEventListener('DOMContentLoaded', () => {
     // Initialize from local storage or system preference
-    const savedTheme: string | null = localStorage.getItem('theme') || 'theme-light';
+    const savedTheme: string = localStorage.getItem('theme') || 'theme-light';
     const themeName: string = savedTheme.replace('theme-', '');
     updateThemeIcon(themeName);
   });
